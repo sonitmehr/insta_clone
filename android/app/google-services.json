@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215828615857",
+    "project_id": "insta-x-firebase-2933d",
+    "storage_bucket": "insta-x-firebase-2933d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215828615857:android:f51fc2fc12d51de0aa8890",
+        "android_client_info": {
+          "package_name": "com.example.insta_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB01PI2jwAYH_wlI2bgBOV2JsPBoRB1T4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
