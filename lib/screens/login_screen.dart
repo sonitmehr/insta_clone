@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insta_clone/resources/auth_method.dart';
 import 'package:insta_clone/screens/sign_up_screen.dart';
@@ -66,7 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
               SvgPicture.asset(
                 'assets/images/ic_instagram.svg',
                 color: primaryColor,
-                height: 64,
+                height: 100,
+                // width: 40,
               ),
               const SizedBox(
                 height: 64,

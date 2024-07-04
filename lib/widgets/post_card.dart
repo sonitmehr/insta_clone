@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_clone/models/user.dart' as model;
 import 'package:insta_clone/providers/user_provider.dart';
@@ -27,7 +28,22 @@ class _PostCardState extends State<PostCard> {
   @override
   void initState() {
     super.initState();
-    // fetchCommentLen();
+    fetchCommentLen();
+  }
+
+  void fetchCommentLen() async {
+    try {
+      QuerySnapshot snap = await FirebaseFirestore.instance
+          .collection('posts')
+          .doc(widget.snap['postId'])
+          .collection('comments')
+          .get();
+      setState(() {
+        commentLen = snap.docs.length;
+      });
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -271,15 +287,15 @@ class _PostCardState extends State<PostCard> {
                         ),
                       ),
                     ),
-                    onTap: () {}
-                    // Navigator.of(context).push(
-                    //     MaterialPageRoute(
-                    //       builder: (context) => CommentsScreen(
-                    //         postId: widget.snap['postId'].toString(),
-                    //       ),
-                    //     ),
-                    //     ),
-                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => CommentScreen(
+                            snap: widget.snap,
+                          ),
+                        ),
+                      );
+                    }),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   // child: Text(

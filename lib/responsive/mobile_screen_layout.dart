@@ -1,13 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:insta_clone/models/user.dart' as model;
-import 'package:insta_clone/providers/user_provider.dart';
+import 'package:insta_clone/screens/profile_screen.dart';
 import 'package:insta_clone/utils/global_variables.dart';
-import 'package:provider/provider.dart';
 
 import '../utils/colors.dart';
 
@@ -23,6 +18,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   late PageController pageController;
   @override
   void initState() {
+    super.initState();
     // TODO: implement initState
     pageController = PageController();
   }
@@ -41,13 +37,16 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   void navigationTapped(int page) {
     //Animating Page
+    if (page == 4) {
+      homeScreenItems[4] = ProfileScreen(
+        uid: FirebaseAuth.instance.currentUser!.uid,
+      );
+    }
     pageController.jumpToPage(page);
   }
 
   @override
   Widget build(BuildContext context) {
-    model.User user = Provider.of<UserProvider>(context).getUser;
-
     return Scaffold(
       body: PageView(
           controller: pageController,

@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insta_clone/resources/auth_method.dart';
@@ -32,7 +30,6 @@ class _LoginScreenState extends State<SignUpScreen> {
   Uint8List? _image;
 
   void selectImage() async {
-    print("selecting Image");
     Uint8List? image = await pickImage(ImageSource.gallery);
     if (image != null) {
       setState(() {
@@ -42,6 +39,15 @@ class _LoginScreenState extends State<SignUpScreen> {
   }
 
   Future<void> signUpUser() async {
+    if (validateFields() == false) {
+      showSnackBar(context, "Please enter all values");
+      return;
+    }
+    if (_image == null) {
+      showSnackBar(context, "Please select a valid image.");
+      return;
+    }
+
     String res = await AuthMethods().signUpUser(
         email: _emailController.text,
         password: _passwordController.text,
@@ -57,6 +63,16 @@ class _LoginScreenState extends State<SignUpScreen> {
               mobileScreenLayout: MobileScreenLayout(),
               webScreenLayout: WebScreenLayout())));
     }
+  }
+
+  bool validateFields() {
+    if (_emailController.text == "" ||
+        _passwordController.text == "" ||
+        _usernameController.text == "" ||
+        _bioController.text == "") {
+      return false;
+    }
+    return true;
   }
 
   @override
@@ -85,11 +101,11 @@ class _LoginScreenState extends State<SignUpScreen> {
               flex: 2,
               child: Container(),
             ),
-            SvgPicture.asset(
-              'assets/images/ic_instagram.svg',
-              color: primaryColor,
-              height: 64,
-            ),
+            // SvgPicture.asset(
+            //   'assets/images/ic_instagram.svg',
+            //   color: primaryColor,
+            //   height: 64,
+            // ),
             const SizedBox(
               height: 12,
             ),

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_clone/providers/user_provider.dart';
 import 'package:insta_clone/resources/firestore_methods.dart';
@@ -85,12 +84,13 @@ class _CommentScreenState extends State<CommentScreen> {
             ),
             InkWell(
               onTap: () async {
-                FireStoreMethods().postComment(
+                await FireStoreMethods().postComment(
                     widget.snap['postId'],
                     _commentController.text,
                     user.uid,
                     user.username,
                     user.photoUrl);
+                _commentController.clear();
               },
               child: Container(
                 padding: EdgeInsets.all(8),

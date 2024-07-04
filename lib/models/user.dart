@@ -18,6 +18,17 @@ class User {
       required this.followers,
       required this.following});
 
+  static User createEmpty() {
+    return const User(
+        username: '',
+        uid: '',
+        photoUrl: '',
+        email: '',
+        bio: '',
+        followers: [],
+        following: []);
+  }
+
   static User fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
 

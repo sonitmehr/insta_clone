@@ -31,9 +31,12 @@ class _CommentCardState extends State<CommentCard> {
                     text: TextSpan(children: [
                       TextSpan(
                         text: widget.snap['name'] + " ",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
                       ),
-                      TextSpan(text: widget.snap['body'])
+                      TextSpan(
+                          text: widget.snap['body'],
+                          style: TextStyle(color: Colors.white))
                     ]),
                   ),
                   Text(DateFormat.yMMMd().format(

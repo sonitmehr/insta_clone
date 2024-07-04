@@ -41,7 +41,6 @@ class AuthMethods {
 
         String photoUrl = await StorageMethods()
             .addImageToFirebaseStorage('profilePic', file, false);
-
         model.User user = model.User(
             username: username,
             uid: cred.user!.uid,

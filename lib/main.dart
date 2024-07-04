@@ -6,7 +6,6 @@ import 'package:insta_clone/responsive/mobile_screen_layout.dart';
 import 'package:insta_clone/responsive/responsive_layout_screen.dart';
 import 'package:insta_clone/responsive/web_screen_layout.dart';
 import 'package:insta_clone/screens/login_screen.dart';
-import 'package:insta_clone/screens/sign_up_screen.dart';
 import 'package:insta_clone/utils/colors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +35,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => UserProvider())],
       child: MaterialApp(
-        title: 'Instagram Clone',
+        debugShowCheckedModeBanner: false,
+        title: 'Picgram',
         theme: ThemeData.dark()
             .copyWith(scaffoldBackgroundColor: mobileBackgroundColor),
         home: StreamBuilder(

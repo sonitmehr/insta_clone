@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_clone/resources/auth_method.dart';
 import 'package:insta_clone/resources/firestore_methods.dart';
+import 'package:insta_clone/responsive/mobile_screen_layout.dart';
+import 'package:insta_clone/screens/login_screen.dart';
 import 'package:insta_clone/utils/colors.dart';
 import 'package:insta_clone/utils/utils.dart';
 import 'package:insta_clone/widgets/follow_button.dart';
@@ -40,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .get();
 
       var postSnap = await FirebaseFirestore.instance
-          .collection('users')
+          .collection('posts')
           .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .get();
       setState(() {
@@ -67,7 +68,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         : Scaffold(
             appBar: AppBar(
               backgroundColor: mobileBackgroundColor,
-              title: Text('username'),
+              // title: IconButton(
+              //   icon: Icon(Icons.arrow_back),
+              //   onPressed: () => Navigator.pop(context),
+              // ),
               centerTitle: false,
             ),
             body: ListView(children: [
@@ -79,8 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         CircleAvatar(
                           radius: 40,
-                          backgroundImage: NetworkImage(
-                              'https://images.unsplash.com/photo-1682687220199-d0124f48f95b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'),
+                          backgroundImage: NetworkImage(userData['photoUrl']),
                         ),
                         Expanded(
                           child: Row(
@@ -102,7 +105,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             textColor: primaryColor,
                             borderColor: Colors.grey,
                             function: () async {
+                              print("Signed out");
                               await AuthMethods().signOut();
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()));
                             },
                           )
                         : (isFollowing)
